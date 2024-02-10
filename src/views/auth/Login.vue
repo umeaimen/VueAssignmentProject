@@ -1,8 +1,5 @@
 <template>
    <div class="vue-tempalte">
-    {{errors}}
-    {{user}}
-    {{authenticated}}
         <form v-on:submit.prevent="login(form)">
             <h3>Sign In</h3>
 

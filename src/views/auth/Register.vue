@@ -1,26 +1,37 @@
 <template>
   <div class="vue-tempalte">
-      <form v-on:submit.prevent="registerUser">
+      <form v-on:submit.prevent="register(form)">
           <h3>Sign Up</h3>
-
           <div class="form-group">
               <label>Full Name</label>
-               <input v-model="name" type="text" class="form-control form-control-lg"/>
+               <input v-model="form.name" type="text" class="form-control form-control-lg"/>
+                <div v-if="errors.email">
+                    <p class="text-danger">{{errors.email[0]}}</p>
+                </div>
           </div>
 
           <div class="form-group">
               <label>Email address</label>
-              <input v-model="email" type="email" class="form-control form-control-lg"/>
+              <input v-model="form.email" type="email" class="form-control form-control-lg"/>
+               <div v-if="errors.password">
+                    <p class="text-danger">{{errors.name[0]}}</p>
+                </div>
           </div>
 
           <div class="form-group">
               <label>Password</label>
-               <input v-model="password" type="password" class="form-control form-control-lg"/>
+               <input v-model="form.password" type="password" class="form-control form-control-lg"/>
+                <div v-if="errors.password">
+                    <p class="text-danger">{{errors.password[0]}}</p>
+                </div>
           </div>
 
           <div class="form-group">
               <label>Confirm Password</label>
-               <input v-model="confirmPassword" type="password" class="form-control form-control-lg"/>
+               <input v-model="form.confirmPassword" type="password" class="form-control form-control-lg"/>
+               <div v-if="errors.confirmPassword">
+                    <p class="text-danger">{{errors.confirmPassword[0]}}</p>
+                </div>
           </div>
 
           <button type="submit" class="btn btn-dark btn-lg btn-block mt-2">Sign Up</button>
@@ -34,27 +45,12 @@
 </template>
 
 <script setup>
-  import axios from 'axios';
-  import { ref } from 'vue';
-  const name = ref('');
-  const email = ref('');
-  const password = ref('');
-  const confirmPassword = ref('');
-  
-  const registerUser = async () => {
-    try {
-      const response = await axios.post('api/register', {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-        c_password: confirmPassword.value
-      });
-      const token = response.data.token;
-      localStorage.setItem('token', token);
-      console.log('Registration successful:', response.data);
-      // Redirect or perform other actions upon successful registration
-    } catch (error) {
-      console.error('Registration failed:', error.response.data);
-    }
-  };
+  import { reactive} from 'vue';
+   import useAuth from "../../auth/useAuth.js";
+   const {register,errors} = useAuth()
+   const form = reactive({
+    name: '',
+    email: '',
+    password: '',
+   })
 </script>
