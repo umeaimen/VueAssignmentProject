@@ -1,6 +1,8 @@
 import router from '@/router';
 import axios from 'axios'; 
 import { computed, reactive, ref } from 'vue'; 
+import { toast } from 'vue3-toastify'; 
+import 'vue3-toastify/dist/index.css'
 
 const state = reactive({
     authenticated: false,
@@ -41,6 +43,9 @@ const login = async (credentials) => {
         localStorage.setItem('token', JSON.stringify(user));
         await attempt();
         await router.push('/dashboard');
+        toast('user logged in successfully',{
+          autoClose: 1000,
+        })
         console.log('Login successful:', response.data);
     } catch (e) {
         console.log(e);
@@ -57,6 +62,9 @@ const register = async (userData) => {
         localStorage.setItem('token', JSON.stringify(user));
         console.log('Registration successful:', response.data);
         await login({ email: userData.email, password: userData.password });
+        toast('user registered successfully',{
+            autoClose: 1000,
+          })
     } catch (error) {
         console.log('Registration failed:', error.response.data);
         if (error.response.status === 422) {
@@ -78,6 +86,9 @@ const logout = async () => {
             setAuthenticate(false);
             setUser({});
             await router.push('/login');
+            toast('user logout successfully',{
+                autoClose: 1000,
+              })
             console.log('Logged out successfully');
         } catch (error) {
             console.log('Error logging out:', error);
