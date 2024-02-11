@@ -5,16 +5,16 @@
           <div class="form-group">
               <label>Full Name</label>
                <input v-model="form.name" type="text" class="form-control form-control-lg"/>
-                <div v-if="errors.email">
-                    <p class="text-danger">{{errors.email[0]}}</p>
+                <div v-if="errors.name">
+                    <p class="text-danger">{{errors.name[0]}}</p>
                 </div>
           </div>
 
           <div class="form-group">
               <label>Email address</label>
               <input v-model="form.email" type="email" class="form-control form-control-lg"/>
-               <div v-if="errors.password">
-                    <p class="text-danger">{{errors.name[0]}}</p>
+               <div v-if="errors.email">
+                    <p class="text-danger">{{errors.email[0]}}</p>
                 </div>
           </div>
 
@@ -29,7 +29,7 @@
           <div class="form-group">
               <label>Confirm Password</label>
                <input v-model="form.confirmPassword" type="password" class="form-control form-control-lg"/>
-               <div v-if="errors.confirmPassword">
+                <div v-if="errors.confirmPassword">
                     <p class="text-danger">{{errors.confirmPassword[0]}}</p>
                 </div>
           </div>

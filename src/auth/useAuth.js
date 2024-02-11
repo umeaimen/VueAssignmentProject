@@ -94,7 +94,21 @@ const logout = async () => {
             console.log('Error logging out:', error);
             throw error; // Re-throw the error for the caller to handle
         }
-};    
+};  
+
+const updateProfile = async () => {
+    try {
+      const response = await axios.post('/api/user/update-profile', getUser.value);
+      setUser(response.data);
+      console.log('Profile updated successfully:', response.data);
+      // You might want to navigate the user to another page after updating the profile
+    } catch (error) {
+      console.log('Error updating profile:', error.response.data);
+      if (error.response.status === 422) {
+        errors.value = error.response.data.errors;
+      }
+    }
+  };
 
 export default function useAuth() {
     return {
@@ -103,6 +117,7 @@ export default function useAuth() {
         getAuthenticated,
         getUser,
         attempt,
+        updateProfile,
         errors,
         logout
     };
