@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Register from '../views/auth/Register.vue'
 import Login from '../views/auth/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Profile from '../views/user/Profile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,14 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
+      meta:{
+           requireAuth:true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta:{
            requireAuth:true
       }
