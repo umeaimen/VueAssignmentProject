@@ -1,5 +1,6 @@
 <template>
   <div class="vue-tempalte">
+    {{getUser}}
     <h2>Edit Profile</h2>
     <form @submit.prevent="updateProfile">
       <div class="form-group">
@@ -16,21 +17,6 @@
             <p class="text-danger">{{errors.email[0]}}</p>
         </div>
       </div>
-      <div class="form-group">
-        <label for="password">New Password</label>
-        <input type="password" id="password" v-model="user.password" class="form-control" />
-            <div v-if="errors.password">
-                <p class="text-danger">{{errors.password[0]}}</p>
-            </div>
-      </div>
-      <div class="form-group">
-        <label for="confirmPassword">Confirm New Password</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" class="form-control" />
-            <div v-if="errors.confirmPassword">
-                <p class="text-danger">{{errors.confirmPassword[0]}}</p>
-            </div>
-      </div>
-      <!-- Add more fields as needed -->
       <button type="submit"  class="btn btn-dark btn-lg btn-block mt-2">Update Profile</button>
     </form>
   </div>

@@ -4,6 +4,7 @@ import Register from '../views/auth/Register.vue'
 import Login from '../views/auth/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Profile from '../views/user/Profile.vue'
+import ChangePassword from'../views/user/ChangePassword.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,7 +45,15 @@ const router = createRouter({
       meta:{
            requireAuth:true
       }
-    }
+    },
+    {
+      path: '/change-password',
+      name: 'change-password',
+      component: ChangePassword,
+      meta:{
+           requireAuth:true
+      }
+    },
   ]
 })
 
