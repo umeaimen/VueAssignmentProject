@@ -6,7 +6,7 @@
               <label>Full Name</label>
                <input v-model="form.name" type="text" class="form-control form-control-lg"/>
                 <div v-if="errors.email">
-                    <p class="text-danger">{{errors.email[0]}}</p>
+                    <p class="text-danger">{{errors.name[0]}}</p>
                 </div>
           </div>
 
@@ -14,7 +14,7 @@
               <label>Email address</label>
               <input v-model="form.email" type="email" class="form-control form-control-lg"/>
                <div v-if="errors.password">
-                    <p class="text-danger">{{errors.name[0]}}</p>
+                    <p class="text-danger">{{errors.email[0]}}</p>
                 </div>
           </div>
 
