@@ -42,6 +42,11 @@
 <script setup>
  import { RouterLink, RouterView } from 'vue-router'
  import useAuth from './auth/useAuth.js'
+  import { onBeforeMount } from 'vue';
+  const {getAuthenticated: authenticated, logout, setAuthenticate} = useAuth()
+  
+  onBeforeMount(() => {
+    localStorage.getItem('token') ? setAuthenticate(true) : setAuthenticate(false)
+  })
 
-const {getAuthenticated: authenticated, logout} = useAuth()
 </script>
