@@ -24,11 +24,11 @@ const setUser = (user) => {
 
 const attempt = async () => {
     try {
-        const bearToken = JSON.parse(localStorage.getItem('token'));
-        axios.defaults.headers.common['Authorization'] = `Bearer ${bearToken.token}`;
-        let user = await axios.get('/api/user');
+        const data = JSON.parse(localStorage.getItem('token'));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+        let user = data.user;
         setAuthenticate(true);
-        setUser(user.data);
+        setUser(user);
         return user;   
     } catch(e) {
         setAuthenticate(false);
@@ -39,18 +39,24 @@ const attempt = async () => {
 const login = async (credentials) => {
     try {
         const response = await axios.post('api/login', credentials);
-        const user = response.data.data;
+        const user = response.data;
         localStorage.setItem('token', JSON.stringify(user));
         await attempt();
         await router.push('/dashboard');
         toast('user logged in successfully',{
           autoClose: 1000,
         })
-        console.log('Login successful:', response.data);
     } catch (e) {
         console.log(e);
         if (e.response.status === 422) {
             errors.value = e.response.data.errors;
+            toast('Pleas fill the required fields',{
+                autoClose: 1000,
+              })
+        }else{
+            toast('user is not authorized',{
+                autoClose: 1000,
+              })
         }
     }
 };
@@ -58,24 +64,29 @@ const login = async (credentials) => {
 const register = async (userData) => {
     try {
         const response = await axios.post('api/register', userData);
-        const user = response.data.data;
+        const user = response.data;
         localStorage.setItem('token', JSON.stringify(user));
-        console.log('Registration successful:', response.data);
-        await login({ email: userData.email, password: userData.password });
+        await attempt();
+        await router.push('/dashboard');
         toast('user registered successfully',{
             autoClose: 1000,
           })
     } catch (error) {
-        console.log('Registration failed:', error.response.data);
         if (error.response.status === 422) {
             errors.value = error.response.data.errors;
+            toast('Pleas fill the required fields',{
+                autoClose: 1000,
+              })
+        }else{
+            toast('user is not authorized',{
+                autoClose: 1000,
+              })
         }
     }
 };
 
 const logout = async () => {
     const bearToken = localStorage.getItem('token')
-    console.log('bear',bearToken);
        try {
             const response = await axios.post('/api/logout', {
                 headers: {
@@ -89,10 +100,10 @@ const logout = async () => {
             toast('user logout successfully',{
                 autoClose: 1000,
               })
-            console.log('Logged out successfully');
         } catch (error) {
-            console.log('Error logging out:', error);
-            throw error; // Re-throw the error for the caller to handle
+            toast('Error logging out',{
+                autoClose: 1000,
+              })
         }
 };    
 

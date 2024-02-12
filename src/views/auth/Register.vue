@@ -1,6 +1,6 @@
 <template>
   <div class="vue-tempalte">
-      <form v-on:submit.prevent="register(form)">
+      <form @submit.prevent="register(form)">
           <h3>Sign Up</h3>
           <div class="form-group">
               <label>Full Name</label>

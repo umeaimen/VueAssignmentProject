@@ -1,6 +1,6 @@
 <template>
    <div class="vue-tempalte">
-        <form v-on:submit.prevent="login(form)">
+        <form @submit.prevent="login(form)">
             <h3>Sign In</h3>
 
             <div class="form-group">
