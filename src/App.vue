@@ -1,85 +1,52 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="vue-tempalte">
+    <!-- Navigation -->
+    <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
+      <div class="container">
+        <a class="navbar-brand float-left" >
+           Product Feedback
+        </a>
+        <ul class="nav navbar-nav flex-row float-right">
+          <li class="nav-item mx-2">
+            <RouterLink class="nav-link pr-3"  to="/">Home</RouterLink>
+          </li>
+          <template v-if="authenticated">
+            <li class="nav-item mx-2">
+              <RouterLink class="nav-link pr-3" to="/dashboard">Dashboard</RouterLink>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-primary" @click="logout">logout</button>
+            </li>
+          </template>
+          <template v-else>
+            <li class="nav-item mx-2">
+              <RouterLink class="btn btn-outline-primary " v-if="!authenticated" to="/login">Sign In</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link pr-3" v-if="!authenticated" to="/register">Sign Up</RouterLink>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </nav>
+    <!-- Main -->
+    <div class="App">
+      <div class="vertical-center">
+        <div class="inner-block">
+          <router-view />
+        </div>
+      </div>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
+<script setup>
+ import { RouterLink, RouterView } from 'vue-router'
+ import useAuth from './auth/useAuth.js'
+  import { onBeforeMount } from 'vue';
+  const {getAuthenticated: authenticated, logout, setAuthenticate} = useAuth()
+  
+  onBeforeMount(() => {
+    localStorage.getItem('token') ? setAuthenticate(true) : setAuthenticate(false)
+  })
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+</script>
