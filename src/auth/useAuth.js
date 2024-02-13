@@ -86,6 +86,46 @@ const logout = async () => {
   }
 }
 
+const updateProfile = async () => {
+    try {
+      const bearToken = JSON.parse(localStorage.getItem('token'))
+      axios.defaults.headers.common["Authorization"] = `Bearer ${bearToken.token}`
+      const response = await axios.post('/api/user/update-profile', getUser.value);
+      setUser(response.data.user);
+      toast('user profile updated successfully', {
+        autoClose: 1000
+      })
+    } catch (error) {
+      if (error.response.status === 422) {
+        errors.value = error.response.data.errors;
+      }else{
+        toast(e.response.data.message, {
+          autoClose: 1000
+        })
+      }
+    }
+};
+
+const updatePassword = async (userData) => {
+  try {
+    const bearToken = JSON.parse(localStorage.getItem('token'))
+    axios.defaults.headers.common["Authorization"] = `Bearer ${bearToken.token}`
+    const response = await axios.post('/api/user/update-password',userData);
+    setUser(response.data.user);
+    toast('user password updated successfully', {
+      autoClose: 1000
+    })
+  } catch (error) {
+    if (error.response.status === 422) {
+      errors.value = error.response.data.errors;
+    }else{
+      toast(e.response.data.message, {
+        autoClose: 1000
+      })
+    }
+  }
+};
+
 export default function useAuth() {
   return {
     login,
@@ -94,6 +134,9 @@ export default function useAuth() {
     getUser,
     errors,
     logout,
-    setAuthenticate
+    setAuthenticate,
+    setUser,
+    updateProfile,
+    updatePassword
   }
 }
