@@ -106,11 +106,11 @@ const updateProfile = async () => {
     }
 };
 
-const updatePassword = async () => {
+const updatePassword = async (userData) => {
   try {
     const bearToken = JSON.parse(localStorage.getItem('token'))
     axios.defaults.headers.common["Authorization"] = `Bearer ${bearToken.token}`
-    const response = await axios.post('/api/user/update-password', getUser.value);
+    const response = await axios.post('/api/user/update-password',userData);
     setUser(response.data.user);
     toast('user password updated successfully', {
       autoClose: 1000

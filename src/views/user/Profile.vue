@@ -1,6 +1,5 @@
 <template>
   <div class="vue-tempalte">
-    {{getUser}}
     <h2>Edit Profile</h2>
     <form @submit.prevent="updateProfile">
       <div class="form-group">
