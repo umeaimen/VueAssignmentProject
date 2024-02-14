@@ -23,6 +23,12 @@ const setUser = (user) => {
   state.user = user
 }
 
+const clearErrors = () => {
+  for (const key in errors.value) {
+    errors.value[key] = [];
+  }
+}
+
 const login = async (credentials) => {
   try {
     const response = await axios.post('api/login', credentials)
@@ -30,14 +36,18 @@ const login = async (credentials) => {
     localStorage.setItem('token', JSON.stringify(user))
     setAuthenticate(true)
     setUser(user)
-    await router.push('/dashboard')
+    await router.push('/')
+     clearErrors();
     toast('user logged in successfully', {
       autoClose: 1000
     })
-  } catch (e) {
+  }  catch (e) {
+    console.log(e)
     if (e.response.status === 422) {
       errors.value = e.response.data.errors
-    } else {
+    } else if( e.response.status === 401){
+      errors.value = { email: ['User is not authorized'] };
+    }else {
       toast(e.response.data.message, {
         autoClose: 1000
       })
@@ -52,7 +62,8 @@ const register = async (userData) => {
     localStorage.setItem('token', JSON.stringify(user))
     setAuthenticate(true)
     setUser(user)
-    await router.push('/dashboard')
+    clearErrors()
+    await router.push('/')
     toast('user registered successfully', {
       autoClose: 1000
     })
@@ -92,6 +103,7 @@ const updateProfile = async () => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${bearToken.token}`
       const response = await axios.post('/api/user/update-profile', getUser.value);
       setUser(response.data.user);
+      clearErrors();
       toast('user profile updated successfully', {
         autoClose: 1000
       })
@@ -112,6 +124,7 @@ const updatePassword = async (userData) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${bearToken.token}`
     const response = await axios.post('/api/user/update-password',userData);
     setUser(response.data.user);
+    clearErrors();
     toast('user password updated successfully', {
       autoClose: 1000
     })
