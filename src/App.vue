@@ -10,9 +10,6 @@
           </li>
           <template v-if="authenticated">
             <li class="nav-item mx-2">
-              <RouterLink class="nav-link pr-3" to="/dashboard">Dashboard</RouterLink>
-            </li>
-            <li class="nav-item mx-2">
               <RouterLink class="nav-link pr-3" to="/create-feedback">Add Feedback</RouterLink>
             </li>
             <li class="nav-item mx-2 dropdown">
@@ -31,10 +28,10 @@
           </template>
           <template v-else>
             <li class="nav-item mx-2">
-              <RouterLink class="btn btn-outline-primary " v-if="!authenticated" to="/login">Sign In</RouterLink>
+              <RouterLink class="btn btn-outline-dark " v-if="!authenticated" to="/login">Sign In</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link pr-3" v-if="!authenticated" to="/register">Sign Up</RouterLink>
+              <RouterLink class="btn btn-outline-dark pr-3" v-if="!authenticated" to="/register">Sign Up</RouterLink>
             </li>
           </template>
         </ul>

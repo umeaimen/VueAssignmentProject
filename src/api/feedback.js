@@ -28,10 +28,11 @@ export const submitFeedback = async (feedbackData) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    clearFeedbackErrors();
     toast('Feedback Created Successfully', {
       autoClose: 1000,
     });
+    await router.push('/')
+    clearFeedbackErrors();
   } catch (error) {
     if (error.response.status === 422) {
       feedbackErrors.value = error.response.data.errors;
@@ -72,26 +73,22 @@ export async function updateFeedback(feedbackData) {
   try {
     const bearToken = JSON.parse(localStorage.getItem('token'));
     axios.defaults.headers.common['Authorization'] = `Bearer ${bearToken.token}`;
-
-    // Upload the attachment
     const formData = new FormData();
-    formData.append('attachment', feedbackData.attachment);    
-
-    const uploadResponse = await axios.post('/api/feedback/upload', formData, {
+    formData.append('attachment', feedbackData.attachment); 
+    formData.append('title', feedbackData.title) 
+    formData.append('category', feedbackData.category) 
+    formData.append('description', feedbackData.description) 
+    formData.append('_method', 'put');
+    const response = await axios.post(`/api/feedback/${feedbackData.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-
-    feedbackData.attachment = uploadResponse.data.path;
-
-    // Update the feedback with the new attachment path
-    const updateResponse = await axios.put(`/api/feedback/${feedbackData.id}`, feedbackData);
-
-    clearFeedbackErrors();
     toast('Feedback Updated Successfully', {
       autoClose: 1000,
     });
+    await router.push('/')
+    clearFeedbackErrors();
   } catch (error) {
     if (error.response && error.response.status === 422) {
       feedbackErrors.value = error.response.data.errors;

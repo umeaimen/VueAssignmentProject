@@ -49,7 +49,7 @@
             class="form-control"
             id="attachment"
             @change="handleFileUpload($event, feedbackData)"
-            placeholder="Attach file"
+            placeholder="Attach file"  accept="image/*"
           />
           <div v-if="feedbackErrors.attachment">
             <p class="text-danger">{{ feedbackErrors.attachment[0] }}</p>
