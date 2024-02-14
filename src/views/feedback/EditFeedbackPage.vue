@@ -1,12 +1,12 @@
 <template>
   <div class="vue-tempalte">
-    <div class="inner-block mt-5">
+    <div class="inner-block">
       <div class="text-center">
         <h3>Edit Feedback</h3>
       </div>
       <form @submit.prevent="handleSubmit" v-if="feedback">
         <div class="form-group mt-2">
-          <label for="title">Title</label>
+          <label class="my-2" for="title">Title</label>
           <input
             type="text"
             id="title"
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="form-group mt-2">
-          <label for="description">Description</label>
+          <label class="my-2" for="description">Description</label>
           <textarea
             id="description"
             v-model="feedback.description"
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="form-group mt-2">
-          <label for="category">Category</label>
+          <label class="my-2" for="category">Category</label>
           <select
             id="category"
             v-model="feedback.category"
@@ -48,8 +48,8 @@
             <p class="text-danger">{{ feedbackErrors.category[0] }}</p>
           </div>
         </div>
-        <div class="form-group mt-2">
-          <label for="attachments">Attachments</label>
+        <div class="form-group">
+          <label class="my-2" for="attachments">Attachments</label>
           <input
             type="file"
             class="form-control"
@@ -61,7 +61,7 @@
             <p class="text-danger">{{ feedbackErrors.attachments[0] }}</p>
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-end my-2">
           <button type="submit" class="btn btn-dark btn-lg btn-block mt-2" :disabled="isSubmitting">
             <span
               v-if="isSubmitting"

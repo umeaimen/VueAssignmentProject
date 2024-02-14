@@ -35,11 +35,7 @@ const login = async (credentials) => {
     setAuthenticate(true)
     setUser(user)
     await router.push('/')
-<<<<<<< HEAD
     clearErrors();
-=======
-     clearErrors();
->>>>>>> dbb3fdcea42307c72a9b4908194d7c29c3b415e1
     toast('user logged in successfully', {
       autoClose: 1000
     })

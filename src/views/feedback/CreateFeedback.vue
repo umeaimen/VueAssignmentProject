@@ -1,12 +1,12 @@
 <template>
   <div class="vue-tempalte">
-    <div class="inner-block mt-5">
+    <div class="inner-block">
       <div class="text-center">
         <h3>Submit Feedback</h3>
       </div>
       <form @submit.prevent="handleSubmitFeedback">
-        <div class="form-group mt-2">
-          <label for="title">Title</label>
+        <div class="form-group">
+          <label class="mb-2" for="title">Title</label>
           <input
             type="text"
             id="title"
@@ -18,8 +18,8 @@
             <p class="text-danger">{{ feedbackErrors.title[0] }}</p>
           </div>
         </div>
-        <div class="form-group mt-2">
-          <label for="description">Description</label>
+        <div class="form-group">
+          <label class="my-2" for="description">Description</label>
           <textarea
             id="description"
             v-model="feedbackData.description"
@@ -30,8 +30,8 @@
             <p class="text-danger">{{ feedbackErrors.description[0] }}</p>
           </div>
         </div>
-        <div class="form-group mt-2">
-          <label for="category">Category</label>
+        <div class="form-group">
+          <label class="my-2" for="category">Category</label>
           <select id="category" v-model="feedbackData.category" class="form-control">
             <option value="">Select Category</option>
             <option value="bug">Bug Report</option>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="form-group mt-2">
-          <label for="attachment">Attachment</label>
+          <label class="my-2" for="attachment">Attachment</label>
           <input
             type="file"
             class="form-control"
@@ -55,7 +55,7 @@
             <p class="text-danger">{{ feedbackErrors.attachment[0] }}</p>
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-end my-2">
           <button type="submit" class="btn btn-dark btn-lg btn-block mt-2" :disabled="isSubmitting">
             <span
               v-if="isSubmitting"

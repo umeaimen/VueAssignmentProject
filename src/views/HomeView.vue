@@ -1,9 +1,9 @@
 <template>
-  <div class="inner-block mt-5">
+  <div class="inner-block">
     <div class="vue-template">
       <div class="row">
         <div class="col-md-12 mb-2">
-          <RouterLink class="btn btn-dark btn-sm float-end" to="/create-feedback"> <i class="bi bi-plus"></i></RouterLink>
+          <RouterLink class="btn btn-dark btn-sm float-end" to="/create-feedback">Add Feedback</RouterLink>
         </div>
       </div>
       <div class="row">
@@ -66,7 +66,7 @@ import useAuth from '../auth/useAuth.js'
 import Swal from 'sweetalert2'
 
 const feedbackList = ref([])
-const itemsPerPage = 2 // Number of items to display per page
+const itemsPerPage = 5 
 const currentPage = ref(1)
 const { getAuthenticated: authenticated } = useAuth()
 const token = localStorage.getItem('token')

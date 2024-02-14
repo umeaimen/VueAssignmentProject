@@ -1,7 +1,7 @@
 <template>
   <div class="vue-tempalte">
-    <div class="inner-block mt-5">
-      <div class="table-responsive my-5">
+    <div class="inner-block">
+      <div class="table-responsive">
         <DataTable :fields="fields" :feedbackData="feedbackData"></DataTable>
       </div>
     </div>
