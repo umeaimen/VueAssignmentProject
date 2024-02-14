@@ -11,7 +11,6 @@ const state = reactive({
 })
 
 const errors = ref({})
-
 const getAuthenticated = computed(() => state.authenticated)
 const getUser = computed(() => state.user)
 
@@ -28,7 +27,6 @@ const clearErrors = () => {
     errors.value[key] = [];
   }
 }
-
 const login = async (credentials) => {
   try {
     const response = await axios.post('api/login', credentials)
@@ -146,6 +144,7 @@ export default function useAuth() {
     getAuthenticated,
     getUser,
     errors,
+    clearErrors,
     logout,
     setAuthenticate,
     setUser,
