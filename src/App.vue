@@ -12,6 +12,9 @@
             <li class="nav-item mx-2">
               <RouterLink class="nav-link pr-3" to="/dashboard">Dashboard</RouterLink>
             </li>
+            <li class="nav-item mx-2">
+              <RouterLink class="nav-link pr-3" to="/create-feedback">Add Feedback</RouterLink>
+            </li>
             <li class="nav-item mx-2 dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  <img alt="Vue logo" class="logo" src="@/assets/avatar.svg" width="25" height="25" />
@@ -19,6 +22,7 @@
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <RouterLink class="dropdown-item" to="/Profile">User Profile</RouterLink>
                 <RouterLink class="dropdown-item" to="/change-password">Change Password</RouterLink>
+                <RouterLink class="dropdown-item" to="/feedback">User Feedbacks</RouterLink>
                 <!-- Add more dropdown items as needed -->
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" @click="logout">Logout</button>
@@ -39,9 +43,7 @@
     <!-- Main -->
     <div class="App">
       <div class="vertical-center">
-        <div class="inner-block">
           <router-view />
-        </div>
       </div>
     </div>
   </div>

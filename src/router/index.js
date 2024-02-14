@@ -5,6 +5,9 @@ import Login from '../views/auth/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Profile from '../views/user/Profile.vue'
 import ChangePassword from'../views/user/ChangePassword.vue'
+import CreateFeedback from '../views/feedback/CreateFeedback.vue'
+import FeedbackIndex from '../views/feedback/FeedbackIndex.vue'
+import EditFeedbackPage from '../views/feedback/EditFeedbackPage.vue'; 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +57,31 @@ const router = createRouter({
            requireAuth:true
       }
     },
+    {
+      path: '/create-feedback',
+      name: 'create-feedback',
+      component: CreateFeedback,
+      meta:{
+           requireAuth:true
+      }
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: FeedbackIndex,
+      meta:{
+           requireAuth:true
+      }
+    },
+    {
+      path: '/edit-feedback/:id',
+      name: 'EditFeedback',
+      component: EditFeedbackPage,
+      props: true,
+      meta:{
+           requireAuth:true
+      }
+    }
   ]
 })
 

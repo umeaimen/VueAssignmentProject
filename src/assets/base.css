@@ -114,3 +114,6 @@ label {
   transition: none;
   color: #222222;
 }
+.page-item .page-link{
+  color: black;
+ }
