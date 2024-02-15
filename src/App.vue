@@ -16,7 +16,7 @@
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <RouterLink class="dropdown-item" to="/Profile">User Profile</RouterLink>
                 <RouterLink class="dropdown-item" to="/change-password">Change Password</RouterLink>
-                <!-- Add more dropdown items as needed -->
+                <!-- <RouterLink class="dropdown-item" to="/feedback">User Feedbacks</RouterLink> -->
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" @click="logout">Logout</button>
               </div>

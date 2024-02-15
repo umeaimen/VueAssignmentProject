@@ -35,7 +35,7 @@ const login = async (credentials) => {
     setAuthenticate(true)
     setUser(user)
     await router.push('/')
-     clearErrors();
+    clearErrors();
     toast('user logged in successfully', {
       autoClose: 1000
     })
@@ -52,7 +52,6 @@ const login = async (credentials) => {
     }
   }
 }
-
 const register = async (userData) => {
   try {
     const response = await axios.post('api/register', userData)
@@ -75,6 +74,7 @@ const register = async (userData) => {
     }
   }
 }
+
 
 const logout = async () => {
   const bearToken = JSON.parse(localStorage.getItem('token'))

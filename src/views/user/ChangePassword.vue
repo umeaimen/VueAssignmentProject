@@ -1,30 +1,30 @@
 <template>
-  <div class="inner-block mt-4">
+  <div class="inner-block">
     <div class="vue-tempalte">
       <h3>Edit Password</h3>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label for="old_password">Old Password</label>
-          <input type="password" id="old_password" v-model="form.old_password" class="form-control" />
+          <label class="mb-2" for="old_password">Old Password</label>
+          <input type="password" id="old_password" v-model="form.old_password" class="form-control" placeholder="Enter current password"/>
           <div v-if="errors.old_password">
             <p class="text-danger">{{errors.old_password[0]}}</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="password">New Password</label>
-          <input type="password" id="password" v-model="form.password" class="form-control" />
+          <label class="my-2" for="password">New Password</label>
+          <input type="password" id="password" v-model="form.password" class="form-control" placeholder="Enter password"/>
           <div v-if="errors.password">
             <p class="text-danger">{{errors.password[0]}}</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Confirm New Password</label>
-          <input type="password" id="confirmPassword" v-model="form.confirmPassword" class="form-control" />
+          <label class="my-2" for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" v-model="form.confirmPassword" class="form-control" placeholder="Enter confirm password"/>
           <div v-if="errors.confirmPassword">
             <p class="text-danger">{{errors.confirmPassword[0]}}</p>
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-end my-2">
           <button type="submit" class="btn btn-dark btn-lg btn-block mt-2" :disabled="isUpdating">
             <span v-if="isUpdating" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Update Password
