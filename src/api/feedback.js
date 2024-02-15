@@ -12,15 +12,12 @@ export const clearFeedbackErrors = () => {
 
 export const handleFileUpload = (event, feedback) => {
   const files = event.target.files;
-  console.log('before',feedback);
   if (files.length > 0) {
     feedback.attachment = files[0];
   }
-  console.log('after',feedback);
 };
 export const submitFeedback = async (feedbackData) => {
   try {
-    console.log('submit req',feedbackData)
     const bearToken = JSON.parse(localStorage.getItem('token'));
     axios.defaults.headers.common['Authorization'] = `Bearer ${bearToken.token}`;
     const response = await axios.post('/api/feedback', feedbackData, {
@@ -101,7 +98,7 @@ export async function updateFeedback(feedbackData) {
 }
 
 
-export default function useAuth() {
+export default function feedback() {
   return {
     fetchFeedbackData,
     submitFeedback,
