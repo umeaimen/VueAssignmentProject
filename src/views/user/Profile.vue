@@ -30,10 +30,10 @@
 
 <script setup>
 import useAuth from "../../auth/useAuth.js";
-import { reactive, ref } from 'vue';
+import { onBeforeMount, reactive, ref } from 'vue';
 
-const { getUser, updateProfile, errors } = useAuth();
-const user = reactive(getUser);
+const { getUser,setUser, updateProfile, errors } = useAuth();
+const user = ref(null);
 const isUpdating = ref(false);
 
 async function handleSubmit() {
@@ -46,4 +46,10 @@ async function handleSubmit() {
     isUpdating.value = false;
   }
 }
+onBeforeMount(() => {
+    if(localStorage.getItem('token')){
+      const data = JSON.parse(localStorage.getItem('token'))
+      user.value = data.user
+    }
+})
 </script>

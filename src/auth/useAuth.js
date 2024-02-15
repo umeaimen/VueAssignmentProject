@@ -40,7 +40,6 @@ const login = async (credentials) => {
       autoClose: 1000
     })
   }  catch (e) {
-    console.log(e)
     if (e.response.status === 422) {
       errors.value = e.response.data.errors
     } else if( e.response.status === 401){

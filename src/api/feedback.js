@@ -1,3 +1,4 @@
+import router from '@/router'
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { toast } from 'vue3-toastify';
@@ -25,16 +26,16 @@ export const submitFeedback = async (feedbackData) => {
         'Content-Type': 'multipart/form-data',
       },
     });
+    clearFeedbackErrors();
+    await router.push('/')
     toast('Feedback Created Successfully', {
       autoClose: 1000,
     });
-    await router.push('/')
-    clearFeedbackErrors();
   } catch (error) {
     if (error.response.status === 422) {
       feedbackErrors.value = error.response.data.errors;
     }else{
-      toast(e.response.data.message, {
+      toast(error.response.data.message, {
         autoClose: 1000
       })
     }
@@ -71,7 +72,9 @@ export async function updateFeedback(feedbackData) {
     const bearToken = JSON.parse(localStorage.getItem('token'));
     axios.defaults.headers.common['Authorization'] = `Bearer ${bearToken.token}`;
     const formData = new FormData();
-    formData.append('attachment', feedbackData.attachment); 
+    if(feedbackData.attachment) {
+      formData.append('attachment', feedbackData.attachment); 
+    }
     formData.append('title', feedbackData.title) 
     formData.append('category', feedbackData.category) 
     formData.append('description', feedbackData.description) 
@@ -81,11 +84,11 @@ export async function updateFeedback(feedbackData) {
         'Content-Type': 'multipart/form-data',
       },
     });
+    clearFeedbackErrors();
+    await router.push('/')
     toast('Feedback Updated Successfully', {
       autoClose: 1000,
     });
-    await router.push('/')
-    clearFeedbackErrors();
   } catch (error) {
     if (error.response && error.response.status === 422) {
       feedbackErrors.value = error.response.data.errors;
@@ -102,6 +105,7 @@ export default function feedback() {
   return {
     fetchFeedbackData,
     submitFeedback,
-    handleFileUpload
+    handleFileUpload,
+    clearFeedbackErrors
   }
 }

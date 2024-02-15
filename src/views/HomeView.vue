@@ -2,7 +2,7 @@
   <div class="inner-block">
     <div class="vue-template">
       <div class="row">
-        <div class="col-md-12 mb-2">
+        <div class="col-md-12 mb-2"  v-if="authenticated">
           <RouterLink class="btn btn-dark btn-sm float-end" to="/create-feedback">Add Feedback</RouterLink>
         </div>
       </div>
